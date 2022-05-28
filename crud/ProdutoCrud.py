@@ -36,23 +36,47 @@ class ProdutoCrud:
 
     def cadastrar_produto(self,dados):
         gabarito = ['nome','valor','descricao','quantidade']
-
-        # for chave_esperada in gabarito:
-            # if not self.validacoes.validar_chave_dict(dados,chave_esperada):
-            #     print('erro de validacao')
-            #     return False # colocar um json como retorno
         
         produto = Produto(
             nome=dados['nome'],
             valor=dados['valor'],
             descricao=dados['descricao'],
             quantidade=dados['quantidade']
-        ).retornar_dados_insercao()
+        )
+        produto.retornar_dados_insercao()
 
         try:
             sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(?,?,?,?)"
             self.banco.cursor.executemany(sql,produto)
             self.banco.conexao.commit()
+            return produto.gerar_codigo_status(200,"cadastrado com sucesso")
         except:
-            print('erro')
-            return False # colocar um json como retorno
+            return produto.gerar_codigo_status(500,"erro ao cadastrar")
+
+    def alterar_produto(self,dados)->dict:
+        gabarito = ['nome','valor','descricao','quantidade']
+        
+        produto = Produto(
+            nome=dados['nome'],
+            valor=dados['valor'],
+            descricao=dados['descricao'],
+            quantidade=dados['quantidade'],
+            codigo=dados['codigo']
+        )
+        lista_alterado = produto.retornar_dados_alterar()
+        try:
+            sql = """UPDATE TB_PRODUTO SET NM_PRODUTO = ?,
+                VL_PRODUTO = ?,
+                DS_DESCRICAO = ?,
+                QT_PRODUTO = ?
+                WHERE ID_PRODUTO = ?;"""
+
+            self.banco.cursor.executemany(sql,lista_alterado)
+            self.banco.conexao.commit()
+            return produto.gerar_codigo_status(200,"alterado com sucesso")
+        except:
+            return produto.gerar_codigo_status(500,"erro ao alterar")
+
+    def deletar_produto(self):
+        pass
+

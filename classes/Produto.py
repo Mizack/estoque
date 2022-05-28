@@ -10,3 +10,14 @@ class Produto:
     def retornar_dados_insercao(self)->list:
         dados = (self.nome,self.valor,self.descricao,self.quantidade)
         return [dados]
+    
+    def retornar_dados_alterar(self)->list:
+        dados = (self.nome,self.valor,self.descricao,self.quantidade,self.codigo)
+        return [dados]
+
+    def gerar_codigo_status(self,codigo:int,mensagem:str)->dict:
+        codigo_status = {
+            "codigo":codigo,
+            "mensagem":mensagem
+        }
+        return codigo_status

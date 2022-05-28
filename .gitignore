@@ -285,3 +285,4 @@ cython_debug/
 teste.txt
 *.txt
 teste.py
+teste*
