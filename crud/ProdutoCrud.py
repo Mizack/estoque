@@ -10,17 +10,17 @@ class ProdutoCrud:
         self.banco = Banco()
         self.validacoes = Validacoes()
 
-    def listar_produtos(self):
+    def listar_produtos(self)->dict:
         try:
             sql = 'SELECT * FROM TB_PRODUTO'
             self.banco.cursor.execute(sql)
             resultado = self.banco.cursor.fetchall()
+            
             return self.__listagem(resultado)
         except:
-            print('Erro de inserção')
-            return False
+            return self.validacoes.gerar_codigo_status(500,"erro ao listar")
 
-    def __listagem(self,resultado):
+    def __listagem(self,resultado)->dict:
         json_retornado = []
         for dados_retornados in resultado:
             sub_json = {
@@ -32,26 +32,30 @@ class ProdutoCrud:
                 'ultima_alteracao':dados_retornados[5]
             }
             json_retornado.append(sub_json)
-        return json_retornado
+        json_final = {
+            "codigo":200,
+            "mensagem":json_retornado
+        }
+        return json_final
 
-    def cadastrar_produto(self,dados):
+    def cadastrar_produto(self,dados)->dict:
         gabarito = ['nome','valor','descricao','quantidade']
-        
+        print(dados)
         produto = Produto(
             nome=dados['nome'],
-            valor=dados['valor'],
+            valor=float(dados['valor']),
             descricao=dados['descricao'],
-            quantidade=dados['quantidade']
+            quantidade=int(dados['quantidade'])
         )
-        produto.retornar_dados_insercao()
+        dado_inserido = produto.retornar_dados_insercao()
 
         try:
             sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(?,?,?,?)"
-            self.banco.cursor.executemany(sql,produto)
+            self.banco.cursor.executemany(sql,dado_inserido)
             self.banco.conexao.commit()
-            return produto.gerar_codigo_status(200,"cadastrado com sucesso")
+            return self.validacoes.gerar_codigo_status(200,"cadastrado com sucesso")
         except:
-            return produto.gerar_codigo_status(500,"erro ao cadastrar")
+            return self.validacoes.gerar_codigo_status(500,"erro ao cadastrar")
 
     def alterar_produto(self,dados)->dict:
         gabarito = ['nome','valor','descricao','quantidade']
@@ -73,10 +77,16 @@ class ProdutoCrud:
 
             self.banco.cursor.executemany(sql,lista_alterado)
             self.banco.conexao.commit()
-            return produto.gerar_codigo_status(200,"alterado com sucesso")
+            return self.validacoes.gerar_codigo_status(200,"alterado com sucesso")
         except:
-            return produto.gerar_codigo_status(500,"erro ao alterar")
+            return self.validacoes.gerar_codigo_status(500,"erro ao alterar")
 
-    def deletar_produto(self):
-        pass
+    def deletar_produto(self,dados)->dict:
+        try:
+            sql = "DELETE FROM TB_PRODUTO WHERE ID_PRODUTO = ?"
+            self.banco.cursor.execute(sql,([dados['codigo']]))
+            self.banco.conexao.commit()
+            return self.validacoes.gerar_codigo_status(200,"excluido com sucesso")
+        except:
+            return self.validacoes.gerar_codigo_status(500,"erro ao excluir")
 
