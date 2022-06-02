@@ -12,16 +12,34 @@ def listar():
     produto = ProdutoCrud()
     return produto.listar_produtos()
 
-@app.route("/cadastrar",methods=["POST"])
+@app.route("/cadastrar",methods=["GET","POST"])
+# @app.route("/cadastrar",methods=["GET"])
 def cadastrar():
+
+    # dados_cadastro = {
+    #     'nome' : request.form.get('nome'),
+    #     'valor' : request.form.get('valor'),
+    #     'descricao' : request.form.get('descricao'),
+    #     'quantidade' : request.form.get('quantidade')
+    # }
+    # # print(request.form.get('senha'))
+    # produto = ProdutoCrud()
+    
+    return render_template('cadastro.html')
+    # return render_template('cadastro.html')
+
+@app.route("/cadastro",methods=["POST"])
+def cadastro():
     dados_cadastro = {
         'nome' : request.form.get('nome'),
         'valor' : request.form.get('valor'),
         'descricao' : request.form.get('descricao'),
         'quantidade' : request.form.get('quantidade')
     }
+    print(request.form.get('senha'))
     produto = ProdutoCrud()
-    return produto.cadastrar_produto(dados_cadastro)
+    produto.cadastrar_produto(dados_cadastro)
+    return render_template('cadastrado.html')
 
 @app.errorhandler(404) 
 def not_found(e):
