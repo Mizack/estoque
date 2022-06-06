@@ -12,34 +12,53 @@ def listar():
     produto = ProdutoCrud()
     return produto.listar_produtos()
 
-@app.route("/cadastrar",methods=["GET","POST"])
-# @app.route("/cadastrar",methods=["GET"])
-def cadastrar():
+# @app.route("/cadastrar",methods=["GET","POST"])
+# # @app.route("/cadastrar",methods=["GET"])
+# def cadastrar():
 
-    # dados_cadastro = {
-    #     'nome' : request.form.get('nome'),
-    #     'valor' : request.form.get('valor'),
-    #     'descricao' : request.form.get('descricao'),
-    #     'quantidade' : request.form.get('quantidade')
-    # }
-    # # print(request.form.get('senha'))
-    # produto = ProdutoCrud()
+#     # dados_cadastro = {
+#     #     'nome' : request.form.get('nome'),
+#     #     'valor' : request.form.get('valor'),
+#     #     'descricao' : request.form.get('descricao'),
+#     #     'quantidade' : request.form.get('quantidade')
+#     # }
+#     # # print(request.form.get('senha'))
+#     # produto = ProdutoCrud()
     
-    return render_template('cadastro.html')
-    # return render_template('cadastro.html')
+#     return render_template('cadastro.html')
+#     # return render_template('cadastro.html')
 
-@app.route("/cadastro",methods=["POST"])
-def cadastro():
+@app.route("/cadastrar",methods=["POST"])
+def cadastrar():
     dados_cadastro = {
         'nome' : request.form.get('nome'),
         'valor' : request.form.get('valor'),
         'descricao' : request.form.get('descricao'),
         'quantidade' : request.form.get('quantidade')
     }
-    print(request.form.get('senha'))
     produto = ProdutoCrud()
     produto.cadastrar_produto(dados_cadastro)
-    return render_template('cadastrado.html')
+    return produto.cadastrar_produto(dados_cadastro)
+
+@app.route("/alterar",methods=["POST"])
+def alterar():
+    dados_alterados = {
+        'codigo' : request.form.get('codigo'),
+        'nome' : request.form.get('nome'),
+        'valor' : request.form.get('valor'),
+        'descricao' : request.form.get('descricao'),
+        'quantidade' : request.form.get('quantidade')
+    }
+    produto = ProdutoCrud()
+    return produto.alterar_produto(dados_alterados)
+
+@app.route("/deletar",methods=["POST"])
+def deletar():
+    codigo_delecao = {
+        'codigo' : request.form.get('codigo')
+    }
+    produto = ProdutoCrud()
+    return produto.deletar_produto(codigo_delecao)
 
 @app.errorhandler(404) 
 def not_found(e):
