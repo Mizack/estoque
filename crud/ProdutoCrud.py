@@ -40,7 +40,7 @@ class ProdutoCrud:
 
     def cadastrar_produto(self,dados)->dict:
         gabarito = ['nome','valor','descricao','quantidade']
-        print(dados)
+        # print(dados)
         produto = Produto(
             nome=dados['nome'],
             valor=float(dados['valor']),

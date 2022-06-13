@@ -8,6 +8,6 @@ class Validacoes:
     def gerar_codigo_status(self,codigo:int,mensagem:str)->dict:
         codigo_status = {
             "codigo":codigo,
-            "mensagem":mensagem
+            "data":mensagem
         }
         return codigo_status
