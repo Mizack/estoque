@@ -7,18 +7,18 @@ import json
 
 class ProdutoCrud:
     def __init__(self) -> None:
-        self.banco = Banco()
-        self.validacoes = Validacoes()
+        self.__banco = Banco()
+        self.__validacoes = Validacoes()
 
     def listar_produtos(self)->dict:
         try:
             sql = 'SELECT * FROM TB_PRODUTO'
-            self.banco.cursor.execute(sql)
-            resultado = self.banco.cursor.fetchall()
+            self.__banco.cursor.execute(sql)
+            resultado = self.__banco.cursor.fetchall()
             
             return self.__listagem(resultado)
         except:
-            return self.validacoes.gerar_codigo_status(500,"erro ao listar")
+            return self.__validacoes.gerar_codigo_status(500,"erro ao listar")
 
     def __listagem(self,resultado)->dict:
         json_retornado = []
@@ -38,9 +38,12 @@ class ProdutoCrud:
         }
         return json_final
 
-    def cadastrar_produto(self,dados)->dict:
+    def cadastrar_produto(self,dados:dict)->dict:
         gabarito = ['nome','valor','descricao','quantidade']
-        # print(dados)
+        for chave in gabarito:
+            if chave not in dados:
+                return self.__validacoes.gerar_codigo_status(405,f"Parâmetro '{chave}' inválido.")
+
         produto = Produto(
             nome=dados['nome'],
             valor=float(dados['valor']),
@@ -51,15 +54,21 @@ class ProdutoCrud:
 
         try:
             sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(?,?,?,?)"
-            self.banco.cursor.executemany(sql,dado_inserido)
-            self.banco.conexao.commit()
-            return self.validacoes.gerar_codigo_status(200,"cadastrado com sucesso")
+            self.__banco.cursor.executemany(sql,dado_inserido)
+            self.__banco.conexao.commit()
+            return self.__validacoes.gerar_codigo_status(200,"cadastrado com sucesso")
         except:
-            return self.validacoes.gerar_codigo_status(500,"erro ao cadastrar")
+            return self.__validacoes.gerar_codigo_status(500,"erro ao cadastrar")
 
     def alterar_produto(self,dados)->dict:
-        gabarito = ['nome','valor','descricao','quantidade']
+        gabarito = ['nome','valor','descricao','quantidade','codigo']
+        for chave in gabarito:
+            if chave not in dados:
+                return self.__validacoes.gerar_codigo_status(405,f"Parâmetro '{chave}' inválido.")
         
+        if not self.__verificar_exis_item(dados['codigo']):
+            return self.__validacoes.gerar_codigo_status(202,"Não existe nenhuma correspondência para o valor informado.")
+
         produto = Produto(
             nome=dados['nome'],
             valor=dados['valor'],
@@ -75,18 +84,31 @@ class ProdutoCrud:
                 QT_PRODUTO = ?
                 WHERE ID_PRODUTO = ?;"""
 
-            self.banco.cursor.executemany(sql,lista_alterado)
-            self.banco.conexao.commit()
-            return self.validacoes.gerar_codigo_status(200,"alterado com sucesso")
+            self.__banco.cursor.executemany(sql,lista_alterado)
+            self.__banco.conexao.commit()
+            return self.__validacoes.gerar_codigo_status(200,"alterado com sucesso")
         except:
-            return self.validacoes.gerar_codigo_status(500,"erro ao alterar")
+            return self.__validacoes.gerar_codigo_status(500,"erro ao alterar")
 
     def deletar_produto(self,dados)->dict:
+        if not self.__verificar_exis_item(dados['codigo']):
+            return self.__validacoes.gerar_codigo_status(202,"Não existe nenhuma correspondência para o valor informado.")
         try:
             sql = "DELETE FROM TB_PRODUTO WHERE ID_PRODUTO = ?"
-            self.banco.cursor.execute(sql,([dados['codigo']]))
-            self.banco.conexao.commit()
-            return self.validacoes.gerar_codigo_status(200,"excluido com sucesso")
+            self.__banco.cursor.execute(sql,([dados['codigo']]))
+            self.__banco.conexao.commit()
+            return self.__validacoes.gerar_codigo_status(200,"excluido com sucesso")
         except:
-            return self.validacoes.gerar_codigo_status(500,"erro ao excluir")
+            return self.__validacoes.gerar_codigo_status(500,"erro ao excluir")
 
+    def __verificar_exis_item(self,codigo:int)->bool | dict:
+        try:
+            sql = 'SELECT * FROM TB_PRODUTO where ID_PRODUTO = ?'
+            self.__banco.cursor.execute(sql,codigo)
+            resultado = self.__banco.cursor.fetchall()
+            if resultado == []:
+                return False
+            else:
+                return True
+        except:
+            return self.__validacoes.gerar_codigo_status(500,"erro ao listar")
