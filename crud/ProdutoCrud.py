@@ -101,7 +101,7 @@ class ProdutoCrud:
         except:
             return self.__validacoes.gerar_codigo_status(500,"erro ao excluir")
 
-    def __verificar_exis_item(self,codigo:int)->bool | dict:
+    def __verificar_exis_item(self,codigo:int):
         try:
             sql = 'SELECT * FROM TB_PRODUTO where ID_PRODUTO = ?'
             self.__banco.cursor.execute(sql,codigo)
@@ -111,4 +111,4 @@ class ProdutoCrud:
             else:
                 return True
         except:
-            return self.__validacoes.gerar_codigo_status(500,"erro ao listar")
+            raise self.__validacoes.gerar_codigo_status(500,"Erro ao listar")
