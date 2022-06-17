@@ -1,5 +1,6 @@
 CREATE TABLE TB_PRODUTO(
-    ID_PRODUTO int not null primary key IDENTITY(1,1),
+    -- ID_PRODUTO int not null primary key IDENTITY(1,1),
+    ID_PRODUTO int not null primary key auto_increment,
 	NM_PRODUTO VARCHAR(200) NOT NULL,
 	VL_PRODUTO NUMERIC(8,2) NOT NULL,
 	DS_DESCRICAO VARCHAR(400) NOT NULL,

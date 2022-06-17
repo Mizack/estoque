@@ -51,9 +51,10 @@ class ProdutoCrud:
             quantidade=int(dados['quantidade'])
         )
         dado_inserido = produto.retornar_dados_insercao()
+        # print(dado_inserido)
 
         try:
-            sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(?,?,?,?)"
+            sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(%s,%s,%s,%s)"
             self.__banco.cursor.executemany(sql,dado_inserido)
             self.__banco.conexao.commit()
             return self.__validacoes.gerar_codigo_status(200,"cadastrado com sucesso")
@@ -78,11 +79,11 @@ class ProdutoCrud:
         )
         lista_alterado = produto.retornar_dados_alterar()
         try:
-            sql = """UPDATE TB_PRODUTO SET NM_PRODUTO = ?,
-                VL_PRODUTO = ?,
-                DS_DESCRICAO = ?,
-                QT_PRODUTO = ?
-                WHERE ID_PRODUTO = ?;"""
+            sql = """UPDATE TB_PRODUTO SET NM_PRODUTO = %s,
+                VL_PRODUTO = %s,
+                DS_DESCRICAO = %s,
+                QT_PRODUTO = %s
+                WHERE ID_PRODUTO = %s;"""
 
             self.__banco.cursor.executemany(sql,lista_alterado)
             self.__banco.conexao.commit()
@@ -94,7 +95,7 @@ class ProdutoCrud:
         if not self.__verificar_exis_item(dados['codigo']):
             return self.__validacoes.gerar_codigo_status(202,"Não existe nenhuma correspondência para o valor informado.")
         try:
-            sql = "DELETE FROM TB_PRODUTO WHERE ID_PRODUTO = ?"
+            sql = "DELETE FROM TB_PRODUTO WHERE ID_PRODUTO = %s"
             self.__banco.cursor.execute(sql,([dados['codigo']]))
             self.__banco.conexao.commit()
             return self.__validacoes.gerar_codigo_status(200,"excluido com sucesso")
@@ -103,7 +104,7 @@ class ProdutoCrud:
 
     def __verificar_exis_item(self,codigo:int):
         try:
-            sql = 'SELECT * FROM TB_PRODUTO where ID_PRODUTO = ?'
+            sql = 'SELECT * FROM TB_PRODUTO where ID_PRODUTO = %s'
             self.__banco.cursor.execute(sql,codigo)
             resultado = self.__banco.cursor.fetchall()
             if resultado == []:

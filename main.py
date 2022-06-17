@@ -17,7 +17,8 @@ def cadastrar():
         'quantidade' : request.form.get('quantidade')
     }
     produto = ProdutoCrud()
-    produto.cadastrar_produto(dados_cadastro)
+    print(dados_cadastro)
+    # produto.cadastrar_produto(dados_cadastro)
     return produto.cadastrar_produto(dados_cadastro)
 
 @app.route("/alterar",methods=["POST"])
@@ -40,7 +41,7 @@ def deletar():
     produto = ProdutoCrud()
     return produto.deletar_produto(codigo_delecao)
 
-@app.errorhandler(404) 
+@app.errorhandler(404)
 def not_found(e):
     erro = {
             "codigo":404,

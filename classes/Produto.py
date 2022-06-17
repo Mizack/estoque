@@ -90,10 +90,9 @@ class Produto:
 
     @lista_erros.setter
     def lista_erros(self,lista_erros):
-        print('acessou')
+        # print('acessou')
         lista = ["a"]
         self._lista_erros = lista.append(lista_erros)
-        print(self._lista_erros)
 
     def retornar_dados_insercao(self)->list:
         dados = (self.nome,self.valor,self.descricao,self.quantidade)
