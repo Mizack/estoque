@@ -283,7 +283,7 @@ cython_debug/
 
 ### Meus arquivos ###
 teste.txt
-*.txt
+# *.txt
 teste.py
 teste*
 *.env
