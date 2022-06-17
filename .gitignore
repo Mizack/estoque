@@ -286,3 +286,4 @@ teste.txt
 *.txt
 teste.py
 teste*
+*.env

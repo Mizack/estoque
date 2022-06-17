@@ -1,4 +1,7 @@
 import pymysql
+import os
+from dotenv import load_dotenv
+
 
 class Banco:
     def __init__(self) -> None:
@@ -6,10 +9,10 @@ class Banco:
 
     def __chamar_db(self):
         try: # Conectar com o banco de dados
-
-            endpoint= "miza.c4nf3gvviehu.us-east-1.rds.amazonaws.com"
-            user= "admin"
-            psswd= "Miza2214!" 
+            load_dotenv()
+            endpoint= os.environ.get("endpoint")
+            user= os.environ.get("user")
+            psswd= os.environ.get("psswd")
             conexao = pymysql.connect(host= endpoint,user= user,password= psswd,database="estoque")
             cursor = conexao.cursor()
             return conexao,cursor
