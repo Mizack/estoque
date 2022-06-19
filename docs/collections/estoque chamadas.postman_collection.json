@@ -37,7 +37,7 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "nome",
+							"key": "nomeg",
 							"value": "inserido via postman 2",
 							"type": "text"
 						},
@@ -85,7 +85,7 @@
 					"formdata": [
 						{
 							"key": "codigo",
-							"value": "5004",
+							"value": "5",
 							"type": "text"
 						}
 					]
@@ -124,12 +124,12 @@
 					"formdata": [
 						{
 							"key": "codigo",
-							"value": "5005",
+							"value": "6",
 							"type": "text"
 						},
 						{
 							"key": "nome",
-							"value": "",
+							"value": "df",
 							"type": "text"
 						},
 						{

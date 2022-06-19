@@ -3,10 +3,6 @@ from crud.ProdutoCrud import ProdutoCrud
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return '<p>ola mundo\nteste subindo api para aws</p>'
-
 @app.route("/listar")
 def listar():
     produto = ProdutoCrud()
@@ -21,8 +17,6 @@ def cadastrar():
         'quantidade' : request.form.get('quantidade')
     }
     produto = ProdutoCrud()
-    print(dados_cadastro)
-    # produto.cadastrar_produto(dados_cadastro)
     return produto.cadastrar_produto(dados_cadastro)
 
 @app.route("/alterar",methods=["POST"])

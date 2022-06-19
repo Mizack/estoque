@@ -116,7 +116,9 @@ class ProdutoCrud:
             return self.__validacoes.gerar_codigo_status(500,"erro ao excluir")
 
     def __verificar_exis_item(self,codigo):
-        if type(codigo) != int:
+        try:
+            codigo = int(codigo)
+        except:
             return self.__validacoes.gerar_codigo_status(405,f"Parâmetro inválido.")
         try:
             sql = 'SELECT * FROM TB_PRODUTO where ID_PRODUTO = %s'
