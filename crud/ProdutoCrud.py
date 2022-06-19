@@ -50,18 +50,12 @@ class ProdutoCrud:
             descricao=dados['descricao'],
             quantidade=int(dados['quantidade'])
         )
-        if produto.erro_instancia() == True:
+        erro_instancia = produto.erro_instancia()
+        if erro_instancia == True:
             dado_inserido = produto.retornar_dados_insercao()
-
-            try:
-                sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(%s,%s,%s,%s)"
-                self.__banco.cursor.executemany(sql,dado_inserido)
-                self.__banco.conexao.commit()
-                return self.__validacoes.gerar_codigo_status(200,"cadastrado com sucesso")
-            except:
-                return self.__validacoes.gerar_codigo_status(500,"erro ao cadastrar")
+            return self.__efetuar_cadastro(dado_inserido)
         else:
-            return produto.erro_instancia()
+            return erro_instancia
 
     def alterar_produto(self,dados)->dict:
         gabarito = ['nome','valor','descricao','quantidade','codigo']
@@ -83,22 +77,36 @@ class ProdutoCrud:
             quantidade=dados['quantidade'],
             codigo=dados['codigo']
         )
-        if produto.erro_instancia() == True:
-            lista_alterado = produto.retornar_dados_alterar()
-            try:
-                sql = """UPDATE TB_PRODUTO SET NM_PRODUTO = %s,
-                    VL_PRODUTO = %s,
-                    DS_DESCRICAO = %s,
-                    QT_PRODUTO = %s
-                    WHERE ID_PRODUTO = %s;"""
-
-                self.__banco.cursor.executemany(sql,lista_alterado)
-                self.__banco.conexao.commit()
-                return self.__validacoes.gerar_codigo_status(200,"alterado com sucesso")
-            except:
-                return self.__validacoes.gerar_codigo_status(500,"erro ao alterar")
+        
+        erro_instancia = produto.erro_instancia()
+        if erro_instancia == True:
+            lista_alteracao = produto.retornar_dados_alterar()
+            return self.__efetuar_alteracao(lista_alteracao)
         else:
-            return produto.erro_instancia()
+            return erro_instancia
+
+    def __efetuar_cadastro(self,dado_inserido):
+        try:
+            sql = "INSERT INTO TB_PRODUTO(NM_PRODUTO,VL_PRODUTO,DS_DESCRICAO,QT_PRODUTO)VALUES(%s,%s,%s,%s)"
+            self.__banco.cursor.executemany(sql,dado_inserido)
+            self.__banco.conexao.commit()
+            return self.__validacoes.gerar_codigo_status(200,"cadastrado com sucesso")
+        except:
+            return self.__validacoes.gerar_codigo_status(500,"erro ao cadastrar")
+
+    def __efetuar_alteracao(self,lista_alteracao):
+        try:
+            sql = """UPDATE TB_PRODUTO SET NM_PRODUTO = %s,
+                VL_PRODUTO = %s,
+                DS_DESCRICAO = %s,
+                QT_PRODUTO = %s
+                WHERE ID_PRODUTO = %s;"""
+
+            self.__banco.cursor.executemany(sql,lista_alteracao)
+            self.__banco.conexao.commit()
+            return self.__validacoes.gerar_codigo_status(200,"alterado com sucesso")
+        except:
+            return self.__validacoes.gerar_codigo_status(500,"erro ao alterar")
 
     def deletar_produto(self,dados)->dict:
         validar_existencia_dados = self.__verificar_exis_item(dados['codigo'])
