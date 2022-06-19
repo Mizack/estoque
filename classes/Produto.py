@@ -3,24 +3,17 @@ sys.path.append(".")
 from classes.Validacoes import Validacoes
 class Produto:
     
-    def __init__(self,nome:str,valor:float,descricao:str,quantidade:int,codigo:int=0):
+    def __init__(self,nome:str="",valor:float="",descricao:str="",quantidade:int="",codigo:int=0):
+        self.lista_erros = []
+        self.validacoes = Validacoes()
+
         self.nome = nome
         self.valor = valor
         self.descricao = descricao
         self.quantidade = quantidade
         if codigo != 0:
             self.codigo = codigo
-        self.lista_erros = []
-        
-        self.validacoes = Validacoes()
 
-        # if self.lista_erros != []:
-        #     erro = {
-        #         "codigo":405,
-        #         "data":self.lista_erros
-        #     }
-        #     print(erro)
-        #     return erro 
 
     @property
     def codigo(self):
@@ -31,7 +24,7 @@ class Produto:
         if self.__validar_campo_vazio(codigo):
             self._codigo = codigo
         else:
-            print("Erro na validação de codigo")
+            self.inserir_erro("Erro na validação de codigo")
 
 
     @property
@@ -43,9 +36,7 @@ class Produto:
         if self.__validar_campo_vazio(nome):
             self._nome = nome
         else:
-            # self.lista_erros("Erro na validação de nome")
-            # print(self.lista_erros)
-            print("Erro na validação de nome")
+            self.inserir_erro("Erro na validação de nome")
 
 
     @property
@@ -57,7 +48,7 @@ class Produto:
         if self.__validar_campo_vazio(valor):
             self._valor = valor
         else:
-            print("Erro na validação de valor")
+            self.inserir_erro("Erro na validação de valor")
 
 
     @property
@@ -69,7 +60,7 @@ class Produto:
         if self.__validar_campo_vazio(descricao):
             self._descricao = descricao
         else:
-            print("Erro na validação de descricao")
+            self.inserir_erro("Erro na validação de descricao")
 
 
     @property
@@ -81,18 +72,17 @@ class Produto:
         if self.__validar_campo_vazio(quantidade):
             self._quantidade = quantidade
         else:
-            print("Erro na validação de quantidade")
+            self.inserir_erro("Erro na validação de quantidade")
 
 
-    @property
-    def lista_erros(self):
-        return self._lista_erros
+    def erro_instancia(self):
+        if self.__validar_campo_vazio(self.lista_erros):
+            return self.validacoes.gerar_codigo_status(400,self.lista_erros)
+        else:
+            return True
 
-    @lista_erros.setter
-    def lista_erros(self,lista_erros):
-        # print('acessou')
-        lista = ["a"]
-        self._lista_erros = lista.append(lista_erros)
+    def inserir_erro(self,lista_erros):
+        self.lista_erros.append(lista_erros)
 
     def retornar_dados_insercao(self)->list:
         dados = (self.nome,self.valor,self.descricao,self.quantidade)
