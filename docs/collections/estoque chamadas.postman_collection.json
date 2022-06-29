@@ -12,15 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/listar",
-					"protocol": "http",
+					"raw": "https://estoquemiza.herokuapp.com/listar",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"estoquemiza",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"listar"
 					]
@@ -37,8 +35,8 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "nomeg",
-							"value": "inserido via postman 2",
+							"key": "nome",
+							"value": "inserido pelo heroku",
 							"type": "text"
 						},
 						{
@@ -59,15 +57,13 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/cadastrar",
-					"protocol": "http",
+					"raw": "https://estoquemiza.herokuapp.com/cadastrar",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"estoquemiza",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"cadastrar"
 					]
@@ -91,15 +87,13 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/deletar",
-					"protocol": "http",
+					"raw": "https://estoquemiza.herokuapp.com/deletar",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"estoquemiza",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"deletar"
 					],
@@ -150,15 +144,13 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/alterar",
-					"protocol": "http",
+					"raw": "https://estoquemiza.herokuapp.com/alterar",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"estoquemiza",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"alterar"
 					]
