@@ -3,6 +3,10 @@ from crud.ProdutoCrud import ProdutoCrud
 
 app = Flask(__name__)
 
+@app.rout("/")
+def home():
+    return render_template("index.html")
+
 @app.route("/listar")
 def listar():
     produto = ProdutoCrud()
