@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "dfbf2725-fa97-4765-b725-5d1d04b81f77",
+		"_postman_id": "ec1a518b-26d2-45f0-9c4e-64e4fd78352f",
 		"name": "estoque chamadas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21090698"
+		"_exporter_id": "21783620"
 	},
 	"item": [
 		{
@@ -24,7 +24,54 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "listar-OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/listar",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 200,\n    \"mensagem\": [\n        {\n            \"codigo\": 1,\n            \"descricao\": \"alterado via api\",\n            \"nome\": \"blastoise\",\n            \"quantidade\": 13,\n            \"ultima_alteracao\": \"Fri, 17 Jun 2022 16:42:47 GMT\",\n            \"valor\": \"169.00\"\n        },\n        {\n            \"codigo\": 2,\n            \"descricao\": \"inserido na aws\",\n            \"nome\": \"celuloso\",\n            \"quantidade\": 12,\n            \"ultima_alteracao\": \"Fri, 17 Jun 2022 16:58:59 GMT\",\n            \"valor\": \"150.00\"\n        },\n        {\n            \"codigo\": 3,\n            \"descricao\": \"inserido na aws\",\n            \"nome\": \"celuloso\",\n            \"quantidade\": 12,\n            \"ultima_alteracao\": \"Fri, 17 Jun 2022 16:59:35 GMT\",\n            \"valor\": \"150.00\"\n        },\n        {\n            \"codigo\": 7,\n            \"descricao\": \"um produto\",\n            \"nome\": \"inserido via postman 2\",\n            \"quantidade\": 10,\n            \"ultima_alteracao\": \"Mon, 20 Jun 2022 12:16:18 GMT\",\n            \"valor\": \"2000.00\"\n        },\n        {\n            \"codigo\": 8,\n            \"descricao\": \"um produto\",\n            \"nome\": \"inserido via postman 2\",\n            \"quantidade\": 10,\n            \"ultima_alteracao\": \"Wed, 29 Jun 2022 00:17:03 GMT\",\n            \"valor\": \"2000.00\"\n        },\n        {\n            \"codigo\": 9,\n            \"descricao\": \"um produto\",\n            \"nome\": \"inserido pelo heroku\",\n            \"quantidade\": 10,\n            \"ultima_alteracao\": \"Wed, 29 Jun 2022 00:42:00 GMT\",\n            \"valor\": \"2000.00\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "listar-ERRO",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/listar",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 200,\n    \"data\": \"Erro ao listar.\"\n}"
+				}
+			]
 		},
 		{
 			"name": "cadastrar",
@@ -69,7 +116,104 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "cadastrar-OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "inserido pelo heroku",
+									"type": "text"
+								},
+								{
+									"key": "valor",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": "um produto",
+									"type": "text"
+								},
+								{
+									"key": "quantidade",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/cadastrar",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"cadastrar"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 200,\n    \"data\": \"cadastrado com sucesso\"\n}"
+				},
+				{
+					"name": "cadastrar-ERRO",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "inserido pelo heroku",
+									"type": "text"
+								},
+								{
+									"key": "valor",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": "um produto",
+									"type": "text"
+								},
+								{
+									"key": "quantidade",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/cadastrar",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"cadastrar"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 400,\n    \"data\": [\n        \"Erro na validação de nome\"\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "deletar",
@@ -81,7 +225,7 @@
 					"formdata": [
 						{
 							"key": "codigo",
-							"value": "5",
+							"value": "1",
 							"type": "text"
 						}
 					]
@@ -106,7 +250,86 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "deletar-OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/deletar?codigo=1",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"deletar"
+							],
+							"query": [
+								{
+									"key": "codigo",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 200,\n    \"data\": \"Erro ao excluir.\"\n}"
+				},
+				{
+					"name": "deletar-ERRO",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/deletar?codigo=1",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"deletar"
+							],
+							"query": [
+								{
+									"key": "codigo",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 500,\n    \"data\": \"Erro ao excluir.\"\n}"
+				}
+			]
 		},
 		{
 			"name": "alterar",
@@ -156,7 +379,134 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "alterar-OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "df",
+									"type": "text"
+								},
+								{
+									"key": "valor",
+									"value": "150",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": "um teste de alteracao",
+									"type": "text"
+								},
+								{
+									"key": "quantidade",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/alterar",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"alterar"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 200,\n    \"data\": \"Alterado com sucesso.\"\n}"
+				},
+				{
+					"name": "alterar-ERRO",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "df",
+									"type": "text"
+								},
+								{
+									"key": "valor",
+									"value": "150",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": "um teste de alteracao",
+									"type": "text"
+								},
+								{
+									"key": "quantidade",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://estoquemiza.herokuapp.com/alterar",
+							"protocol": "https",
+							"host": [
+								"estoquemiza",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"alterar"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 500,\n    \"data\": \"Erro ao alterar.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ERROS",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "sem correspondência de resultados",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\": 202,\n    \"data\": \"Não existe nenhuma correspondência para o valor informado.\"\n}"
+				}
+			]
 		}
 	]
 }
