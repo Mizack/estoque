@@ -104,9 +104,9 @@ class ProdutoCrud:
 
             self.__banco.cursor.executemany(sql,lista_alteracao)
             self.__banco.conexao.commit()
-            return self.__validacoes.gerar_codigo_status(200,"alterado com sucesso")
+            return self.__validacoes.gerar_codigo_status(200,"Alterado com sucesso.")
         except:
-            return self.__validacoes.gerar_codigo_status(500,"erro ao alterar")
+            return self.__validacoes.gerar_codigo_status(500,"Erro ao alterar.")
 
     def deletar_produto(self,dados)->dict:
         validar_existencia_dados = self.__verificar_exis_item(dados['codigo'])
@@ -119,9 +119,9 @@ class ProdutoCrud:
             sql = "DELETE FROM TB_PRODUTO WHERE ID_PRODUTO = %s"
             self.__banco.cursor.execute(sql,([dados['codigo']]))
             self.__banco.conexao.commit()
-            return self.__validacoes.gerar_codigo_status(200,"excluido com sucesso")
+            return self.__validacoes.gerar_codigo_status(200,"Excluido com sucesso.")
         except:
-            return self.__validacoes.gerar_codigo_status(500,"erro ao excluir")
+            return self.__validacoes.gerar_codigo_status(500,"Erro ao excluir.")
 
     def __verificar_exis_item(self,codigo):
         try:
@@ -137,4 +137,4 @@ class ProdutoCrud:
             else:
                 return True
         except:
-            raise self.__validacoes.gerar_codigo_status(500,"Erro ao listar")
+            raise self.__validacoes.gerar_codigo_status(500,"Erro ao listar.")
