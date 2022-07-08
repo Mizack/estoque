@@ -505,6 +505,39 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"codigo\": 202,\n    \"data\": \"Não existe nenhuma correspondência para o valor informado.\"\n}"
+				},
+				{
+					"name": "erro de parâmetros",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\":405,\n    \"data\":\"Parâmetros inválidos.\"\n}"
+				},
+				{
+					"name": "not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\":404,\n    \"data\":\"Erro de requisição.\"\n}"
+				},
+				{
+					"name": "erro ao processar requisição",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"codigo\":500,\n    \"data\":\"Não foi possível processar a requisição.\"\n}"
 				}
 			]
 		}
