@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- using local links -->
+    <!--Bloco Flask-->
     <link rel="stylesheet" href="{{url_for('static',filename='css/main.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='css/sidebar-themes.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap-treeview.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='css/postman.min.css')}}">
-
+    <!--Fim Bloco Flask-->
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" /> </head>
 
 <body>
@@ -802,6 +803,7 @@ GET</code>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!--Bloco Flask-->
     <script src="{{ url_for('static', filename='js/bootstrap-treeview.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.min.js') }}"></script>
     <script type="application/javascript">
@@ -816,7 +818,7 @@ GET</code>
             showMethod: true
         });
     </script>
-
+    <!--Fim Bloco Flask-->
 </body>
 
 </html>
